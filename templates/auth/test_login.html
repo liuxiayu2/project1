@@ -1,0 +1,29 @@
+{% extends 'auth/base.html' %}
+{% block title %}您好！{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/5.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/xfzauth/test_login&resign.css">
+{% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        <div class="hide"></div>
+        <div class="login_div">
+            {% block login_title %}<h1>登录</h1>{% endblock %}
+            <h3 class="hide_h3"></h3>
+            <a href="{% url 'news:index' %}">隐藏内容</a>
+            <p><span class="login_name">用户昵称：</span><input type="text" class="login_name" placeholder="用户名"></p>
+            <p><span class="login_passwd">用户密码：</span><input type="text" class="login_passwd" placeholder="密码"></p>
+            <p>
+                <button type="button" class="btn btn-light login_btn">登录</button>
+                <span class="span_t">还没账户？<a href="{% url 'xfzauth:resign' %}">注册</a></span></p>
+        </div>
+
+    </form>
+
+{% endblock %}
+
+{% block js_file %}
+    <script src="https://cdn.staticfile.org/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

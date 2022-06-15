@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{#{% load static %}#}{# 可在setting中设置省掉，使static作为内置标签直接使用 #}
+
+<html lang="zh-CN">
+<head>
+    {% block essentialhead %}{# 公共头 #}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block meta %}    {% endblock %}
+        {#网页图标#}
+        <link rel="shortcut icon" href="/static/img/favicon.ico">
+    {% endblock %}
+
+    {#网页标题#}
+    <title>{% block title %}登录注册{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.staticfile.org/bootstrap/4.6.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="https://cdn.staticfile.org/nprogress/0.1.2/nprogress.min.css" rel="stylesheet">
+
+    {#css文件引入#}
+    {% block css %}     {% endblock %}
+    {#必要框架等的link文件引入#}
+    {% block link %}
+    {% endblock %}
+</head>
+
+<body>
+
+{#主体#}
+{% block body %}
+
+{% endblock %}
+
+
+<!-- Bootstrap -->
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.slim.min.js"></script>
+<script src="https://cdn.staticfile.org/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+{% block js_file %}{% endblock %}
+
+</body>
+</html>
