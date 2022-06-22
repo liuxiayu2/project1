@@ -1,22 +1,32 @@
 {% extends 'auth/base.html' %}
 {% block title %}您好！{% endblock %}
 
-{% block link %}
+{% block css %}
     <link rel="stylesheet" href="https://cdn.staticfile.org/bootstrap/5.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/xfzauth/test_login&resign.css">
 {% endblock %}
 
 {% block body %}
-    <form action="" method="post">
+    <form id="form" action="" method="POST">
+        {% csrf_token %}
         <div class="hide"></div>
         <div class="login_div">
             {% block login_title %}<h1>注册</h1>{% endblock %}
             <h3 class="hide_h3"></h3>
             <a href="{% url 'news:index' %}">隐藏内容</a>
-            <p><span class="login_name">用户昵称：</span><input type="text" class="login_name" placeholder="用户名"></p>
-            <p><span class="login_passwd">用户密码：</span><input type="text" class="login_passwd" placeholder="密码"></p>
+            {#        使用form提交，input必须有name       #}
+            <p><span class="login_name">用户昵称：</span><input type="text" class="login_name" name="username"
+                                                           placeholder="用户名"></p>
+            <p><span class="login_tel">手机号码：</span><input type="text" class="login_tel" name="telephone"
+                                                          placeholder="手机号码"></p>
+            <p><span class="login_passwd">用户密码：</span><input type="password" class="login_passwd" name="password"
+                                                             placeholder="密码"></p>
+            <p><span class="login_passwd1">重复密码：</span><input type="password" class="login_passwd1" name="password1"
+                                                              placeholder="再输入一次密码">
+            </p>
             <p>
-                <button type="button" class="btn btn-light login_btn">注册</button>
+                                <button type="submit" class="btn btn-light register_btn">注册</button>
+{#                <input type="submit" class="btn btn-light register_btn" value="注册" style="width: 120px"></input>#}
                 <span class="span_t">已有账户？<a href="{% url 'xfzauth:login' %}">登录</a></span></p>
         </div>
 
@@ -26,4 +36,11 @@
 
 {% block js_file %}
     <script src="https://cdn.staticfile.org/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js"></script>
+    {#    <script src="{% static 'js/xfzauth/register.js' %}"></script>#}
+    <script>
+        $.ajaxSetup({
+            data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+        });
+    </script>
 {% endblock %}

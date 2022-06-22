@@ -104,6 +104,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# AUTH_USER_MODEL：这个属性是django内置的，她会主动到这个文件中来查找这个属性，如果找到了，就会使用这个属性指定的模型来作为user对象
+# AUTH_USER_MODEL：这个属性是字符串，命名规则是"appname.Modelname"
+# 如果我们设置了AUTH_USER_MODEL，那么项目的makemigration以及migrate命令必须在设置完这些东西后执行，即没执行过
+AUTH_USER_MODEL = 'xfzauth.User'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
