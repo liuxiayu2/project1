@@ -3,7 +3,8 @@ from django.views.generic import View
 from .forms import RegisterForm
 from .models import User
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib import messages
+from django.utils.html import strip_tags #strip_tags去掉HTML文本的全部HTML标签
 
 class LoginView(View):
     def get(self, request):
@@ -18,17 +19,18 @@ class ResignView(View):
 
     def post(self, request):
         form = RegisterForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and form.validate_date(request) is True:
             username = form.cleaned_data.get('username')
             telephone = form.cleaned_data.get('telephone')
             password = form.cleaned_data.get('password')
-            # print('sss%s' % username)
-            # print('sss%s' % telephone)
-            # print('sss%s' % password)
             user = User.objects.create_user(username, telephone, password)
-            login(request,user)
+            login(request, user)
             return redirect(reverse("news:index"))
 
+        elif form.errors:
+            desc = strip_tags(list(form.errors.values())[0])
+            messages.info(request, desc)
         else:
-            print('ddddd')
-            return redirect(reverse('xfzauth:login'))
+            messages.info(request, "手机号已存在")
+
+        return redirect(reverse('xfzauth:resign'))

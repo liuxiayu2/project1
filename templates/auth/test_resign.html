@@ -25,8 +25,27 @@
                                                               placeholder="再输入一次密码">
             </p>
             <p>
-                                <button type="submit" class="btn btn-light register_btn">注册</button>
-{#                <input type="submit" class="btn btn-light register_btn" value="注册" style="width: 120px"></input>#}
+                {% if error %}
+                    {{ error|striptags }}
+                {% elif messages %}
+                    {% for msg in messages %}
+                        <script src="https://cdn.bootcdn.net/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+                        <script>
+                            swal('{{ msg.message}}', {
+                                icon:'error',
+                                button: false,
+                                closeOnClickOutside: false,
+                            });
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1300);
+                            {#location.reload();#}
+                        </script>
+                    {% endfor %}
+                {% endif %}
+
+                <button type="submit" class="btn btn-light register_btn">注册</button>
+                {#                <input type="submit" class="btn btn-light register_btn" value="注册" style="width: 120px"></input>#}
                 <span class="span_t">已有账户？<a href="{% url 'xfzauth:login' %}">登录</a></span></p>
         </div>
 
@@ -38,9 +57,10 @@
     <script src="https://cdn.staticfile.org/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js"></script>
     {#    <script src="{% static 'js/xfzauth/register.js' %}"></script>#}
-    <script>
-        $.ajaxSetup({
-            data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
-        });
-    </script>
+    {#    <script>#}
+    {#        $.ajaxSetup({#}
+    {#            data: {csrfmiddlewaretoken: '{{ csrf_token }}'}#}
+    {#        });#}
+    {#    </script>#}
+
 {% endblock %}
