@@ -2,7 +2,7 @@ from django import forms
 from .models import User
 from django.contrib import messages
 from django.shortcuts import redirect, reverse
-import re
+import re  # 引入re模块实现正则匹配
 
 
 class RegisterForm(forms.Form):
