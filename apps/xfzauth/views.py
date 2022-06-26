@@ -28,8 +28,10 @@ class ResignView(View):
             return redirect(reverse("news:index"))
 
         elif form.errors:
-            desc = strip_tags(list(form.errors.values())[0])
+            desc = strip_tags(list(form.errors.values())[0]) #去掉返回值中所有html标签
             messages.info(request, desc)
+        elif form.validate_date(request) is 1:
+            messages.info(request, "请输入正确的手机号")
         else:
             messages.info(request, "手机号已存在")
 
