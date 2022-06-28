@@ -38,6 +38,9 @@ class ResignView(View):
         elif form.validate_date(request) is 2:
             messages.info(request, "密码应为大小写字母和数字的组合")
             return redirect(reverse('xfzauth:resign'))
+        elif form.validate_date(request) is 3:
+            messages.info(request, "密码不一致")
+            return redirect(reverse('xfzauth:resign'))
         else:
             messages.info(request, "手机号已存在")
             return redirect(reverse('xfzauth:resign'))

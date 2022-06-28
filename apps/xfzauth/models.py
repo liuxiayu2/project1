@@ -21,7 +21,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     # password,last_login不要重写
-    username = models.CharField(max_length=100,unique=True)
+    username = models.CharField(max_length=100)
     telephone = models.CharField(max_length=11, unique=True)
     email = models.EmailField(unique=True, null=True)
     is_active = models.BooleanField(default=True)
