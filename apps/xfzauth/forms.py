@@ -23,10 +23,12 @@ class RegisterForm(forms.Form):
     def validate_date(self, request):
         data = self.cleaned_data
         telephone = data.get('telephone')
-        exists = User.objects.filter(telephone=telephone).exists()
+        password = data.get('password')
+        tel_exists = User.objects.filter(telephone=telephone).exists()
         tel = re.match(r"^1[35678]\d{9}$", telephone)
-        print(tel)
-        if exists:
+        passwd = re.match(r'[a-zA-z0-9]', password)
+        print(passwd)
+        if tel_exists:
             # messages.info(request, '手机号已存在')
             # print('form手机号已存在')
             return redirect(reverse('xfzauth:login'))
@@ -34,5 +36,7 @@ class RegisterForm(forms.Form):
             # messages.info(request, '手机号格式不正确')
             # print('wwwwwwwwwww')
             return 1
+        elif passwd is None:
+            return 2
         else:
             return True
